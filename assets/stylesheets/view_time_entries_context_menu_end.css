@@ -1,0 +1,5 @@
+.locked {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.2;
+}

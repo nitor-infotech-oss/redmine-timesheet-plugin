@@ -1,0 +1,26 @@
+.cutom-p-lable {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.btn-month-lock {
+  border-radius: 50% !important;
+  font-size: 12px !important;
+  border-color: #666666 !important;
+}
+
+.grid-container {
+  display: grid;
+  align-content: center;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  background-color: #032f52;
+  padding: 15px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}

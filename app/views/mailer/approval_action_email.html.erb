@@ -1,0 +1,2 @@
+<p>Dear <%= @user.firstname%>,</p>
+   <p> Your timesheet for date <%= @time_entry.spent_on.strftime("%m/%d/%Y")   %> for the activity <%= @time_entry.activity.name %> has been rejected by your manager. Kindly co-ordinate with your manager and rectify the timesheet.</p>

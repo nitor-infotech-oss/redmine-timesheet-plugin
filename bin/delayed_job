@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+# require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
+# require 'delayed/command'
+# Delayed::Command.new(ARGV).daemonize
+require File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'config', 'environment'))
+require 'delayed/command'
+Delayed::Worker.logger = Logger.new(File.join(Rails.root, 'log', 'dj.log'))
+Delayed::Command.new(ARGV).daemonize
+
+
+# delay_jobs while application is in testing or development
+Delayed::Worker.delay_jobs = false
+Delayed::Worker.max_attempts = 1
+Delayed::Worker.max_run_time = 5.minutes
+Delayed::Worker.logger = Logger.new("#{Whenever.path}/log/delayed_job.log")
+Delayed::Worker.default_queue_name = 'nitor_mailer_job'
+Delayed::Worker.destroy_failed_jobs = false

@@ -1,0 +1,13 @@
+
+<%= form_tag({:action => 'datewise_reports',  method: "post"}) do %>
+  <%= render 'form_date'%>
+  <%= submit_tag("View Report") %>
+<% end %>
+
+<%= link_to "Back", customreports_path, class: 'button' %>
+<button class="button report-export-btn" onclick="exportTableToExcel('tblData','monthly_report')">Export Excel File</button>
+
+<%= render 'report_table' if @result != nil %>
+
+
+<%= stylesheet_link_tag 'application', :plugin => 'time_approval' %>

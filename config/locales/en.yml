@@ -1,0 +1,10 @@
+# English strings go here for Rails i18n
+en:
+  # my_label: "My label"
+
+  field_approval_status_details: "Approval Status"
+  field_approve_time_log: "Approval Action"
+  month_lock: "Dear %{user_name}, Time sheet for this month has been locked. Kindly contact to your PM."
+  admin_month_lock: "Month has been locked!"
+  admin_month_unlock: "Month has been unlocked."
+  update_working_day: "Working days update successfully! "

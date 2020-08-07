@@ -1,0 +1,6 @@
+<%= labelled_form_for :user, @user,
+                     :url => { :action => "account" },
+                     :html => { :id => 'my_account_form',
+                                :method => :post, :multipart => true } do |f| %>
+  <p>ID <%= f.text_field :employee_id,  :required => false, disabled: true %></p>
+<% end %>

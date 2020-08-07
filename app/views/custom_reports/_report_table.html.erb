@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      td, th {
+        border: 1px solid black;
+        padding: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="autoscroll">
+      <% if @result[0].present? %>
+        <table class="list issues odd-even sort-by-id sort-desc" id="tblData">
+          <thead>
+            <tr>
+               <% @result[0].each do |head|%>
+               <th><%= head[0].split('_').map(&:classify).join(' ') %></th>
+              <%end%>
+            </tr>
+          </thead>
+          <tbody>
+              <% @result.each do |row|%>
+              <tr>
+                <% row.each do |col|%>
+                  <td><%= col[1] %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div><h1 style="color: red">No Data for selected date</h1></div>
+      <% end %>
+    </div>
+  </body>
+</html>
+
+<script type="text/javascript">
+  function exportTableToExcel(tableID, filename = 'Reports'){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+  }
+</script>

@@ -1,0 +1,28 @@
+<div class="grid-container">
+  <div>
+    <%= form_with url: custompage_update_path do |f| %>
+      <%= f.label :month_unlock, :class => "cutom-p-lable" %>
+      <%= f.check_box :month_lock, checked: @custom_item.month_lock %>
+      <%= f.submit :class => "btn-month-lock" %>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with url: custompage_update_working_day_path do |f| %>
+      <%= f.label :working_days, :class => "cutom-p-lable" %>
+      <%= f.number_field :working_day, :value => @custom_item.working_day %>
+      <%= f.submit :class => "btn-month-lock" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'custom_page', :plugin => 'time_approval' %>
+<% end %>
+
+<!-- <script type="text/javascript">
+var val = <%= @custom_item.month_lock %>;
+$( "input[type=checkbox]" ).prop( "checked", val );
+</script>
+-->

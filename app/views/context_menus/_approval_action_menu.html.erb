@@ -1,0 +1,28 @@
+<% if User.current.allowed_to?(:approve_log_time, @project) -%>
+<li class="folder">
+  <a href="#" class="submenu"><%= l(:field_approve_time_log) %></a>
+  <ul>
+    <% del = @can[:edit] %>
+    <% @can[:edit] = true %>
+    <% unless @time_entry.nil? %>
+      <% if(@time_entry.approval_status_id == 1) %>
+          <% ApprovalStatus.all.each do |u| -%>
+              <li><%= context_menu_link u.id == 2 ? u.status.chomp("d") : u.status.chomp("ed"), {:controller => 'approval', :action => 'change_status', :ids => @time_entries.collect(&:id), :time_entry => {'approval_status' => u}, :back_url => @back}, :method => :post,
+                                        :selected => (@time_entry && u == @time_entry.approval_status), :disabled => !@can[:edit] %></li>
+          <% end -%>
+      <% else %>
+        <% ApprovalStatus.where.not(id: 1).each do |u| -%>
+            <li><%= context_menu_link u.id == 2 ? u.status.chomp("d") : u.status.chomp("ed"), {:controller => 'approval', :action => 'change_status', :ids => @time_entries.collect(&:id), :time_entry => {'approval_status' => u}, :back_url => @back}, :method => :post,
+                                      :selected => (@time_entry && u == @time_entry.approval_status), :disabled => !@can[:edit] %></li>
+        <% end -%>
+      <% end %>
+    <% else %>
+      <% ApprovalStatus.where(id: 2).each do |u| -%>
+          <li><%= context_menu_link u.id == 2 ? u.status.chomp("d") : u.status.chomp("ed"), {:controller => 'approval', :action => 'change_status', :ids => @time_entries.collect(&:id), :time_entry => {'approval_status' => u}, :back_url => @back}, :method => :post,
+                                    :selected => (@time_entry && u == @time_entry.approval_status), :disabled => !@can[:edit] %></li>
+      <% end -%>
+    <% end %>
+  <% @can[:edit] = del %>
+  </ul>
+</li>
+<% end %>
